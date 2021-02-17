@@ -1,11 +1,15 @@
+// sets the filesystem module from node.js standard library to the const fs so that the module can be used
+const fs = require('fs');
+// same as fs but for our own file to generate the page template and insert name and github link
+const generatePage = require('./src/page-template.js');
+// get the command line arguments starting from index 2 until the end (use .length because backend is exclusive)
 const profileDataArgs = process.argv.slice(2, process.argv.length);
-console.log(profileDataArgs);
+// notation to set variable names for corresponding indices in array
+const [name, github] = profileDataArgs;
+// writeFile takes 3 arguments name of file being written to, what to write, function in case of error
+fs.writeFile('index.html', generatePage(name, github), err => {
+  if (err) throw new Error(err);
 
-const printProfileData = profileDataArr => {
-    for (let i = 0; i < profileDataArr.length; i++) {
-        console.log(profileDataArr[i]);
-    }
-console.log('===============');
-    profileDataArr.forEach(profileItem => console.log(profileItem));
-}
-printProfileData(profileDataArgs);
+  console.log('Portfolio complete! Check out index.html to see the output!');
+}); 
+
