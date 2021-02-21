@@ -1,8 +1,8 @@
 const inquirer = require('inquirer');
 // sets the filesystem module from node.js standard library to the const fs so that the module can be used
-// const fs = require('fs');
+const fs = require('fs');
 // // same as fs but for our own file to generate the page template and insert name and github link
-// const generatePage = require('./src/page-template.js');
+const generatePage = require('./src/page-template.js');
 
 // // writeFile takes 3 arguments name of file being written to, what to write, function in case of error
 // fs.writeFile('index.html', generatePage(name, github), err => {
@@ -137,8 +137,26 @@ const promptProject = portfolioData => {
     });
 };
 
-promptUser()
-.then(promptProject)
-.then(portfolioData => {
-  console.log(portfolioData);
-});
+// promptUser()
+// .then(promptProject)
+// .then(portfolioData => { 
+//   const pageHTML = generatePage(portfolioData);
+const mockData = {
+  name: 'Paul',
+  github: 'paulkup',
+  projects: [
+    {
+      name: 'Weather Dashboard',
+      description: 'Display weather',
+      languages: ['JavaScript', 'HTML', 'CSS', 'JQuery', 'Bootstrap'],
+      link: 'https://paulkup.github.io/weather-dashboard/',
+      feature: true,
+      confirmAddProject: False
+    }
+  ]
+}
+
+  // fs.writeFile('./index.html', pageHTML, err => {
+    // if (err) throw new Error(err);
+  // });
+// });
